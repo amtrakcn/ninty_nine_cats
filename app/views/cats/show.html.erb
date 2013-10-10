@@ -1,0 +1,24 @@
+<h2><%= @cat.name %></h2>
+
+<ul>
+   <li>Age: <%= @cat.age %></li>
+	 <li>Birth date: <%= @cat.birth_date %></li>
+	 <li>Color: <%= @cat.color %></li>
+	 <li>Name: <%= @cat.name %></li>
+	 <li>Sex: <%= @cat.sex %></li>
+</ul>
+
+<h3>Rental requests</h3>
+<ul>
+	<% @rental_requests.each do |rental_request| %>
+	<li>
+		From <%= rental_request.start_date %> to <%= rental_request.end_date %>
+		<% if rental_request.pending?%>
+		<%= button_to "Approve", approve_cat_rental_request_url(rental_request), :method => :post %>
+		<%= button_to "Deny", deny_cat_rental_request_url(rental_request), :method => :post %>
+		<%else%>
+		<%= ": #{rental_request.status}" %>
+		<%end%>
+	</li>
+	<% end %>
+</ul>
